@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, List } from 'antd'
 
-import { EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { EditOutlined, UnorderedListOutlined  } from '@ant-design/icons'
 import UpdatePerson from '../forms/UpdatePerson'
 import RemovePerson from '../buttons/RemovePerson'
 
@@ -67,8 +67,11 @@ const Person = props => {
           style={styles.card}
         >
           <h2>{fullName()}</h2>
-            <InfoCircleOutlined style={{position:'relative'}} key='info' onClick={handleInfoClick} />
+            
+            <UnorderedListOutlined style={{position:'relative'}} key='info' onClick={handleInfoClick} />
             <PersonsBoats id={id} display={display} />
+
+            
         </Card>
       )}
     </List.Item>

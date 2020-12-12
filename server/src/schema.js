@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express'
-import { filter, find, remove } from 'lodash'
+import { filter, find, remove, forOwn } from 'lodash'
 
 const people = [
   {
@@ -112,7 +112,7 @@ const typeDefs = gql`
 
   type Query {
     people: [Person]
-    personWithboats: [Person]
+    personWithboats (personId: String!): [Boat]
   }
 
   type Mutation {
@@ -128,7 +128,8 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     people: () => people,
-    personWithboats(parent, args, context, info) {
+    personWithboats : (parent, args, context, info) => {
+      console.log(args.personId)
       const person = find(boats, item => item.personId == args.personId)
       if (!person) {
         throw new Error(`Couldn't find boat with with person id ${args.personId}`)

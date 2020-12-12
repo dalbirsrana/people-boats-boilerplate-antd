@@ -10,9 +10,9 @@ export const GET_PEOPLE = gql`
   }
 `
 
-export const GET_PEOPLE_BOATS = gql`
-  {
-    personWithboats {
+export const GET_BOATS = gql`
+  query PersonWithBoats($personId: String!) {
+    personWithboats (personId: $personId) {
       id
       year
       make
