@@ -13,7 +13,7 @@ const PersonWithBoats = ({ display, id }) => {
         list: {
             listStyleType: 'none',
             display: 'grid',
-            gridGap: '10px',
+            gap: '10px',
             padding: '10px'
         },
         child: {
@@ -26,12 +26,12 @@ const PersonWithBoats = ({ display, id }) => {
     })
 
     const { loading, error, data } = useQuery(GET_PEOPLE_BOATS, { variables: { personId: id } })
-    if (loading) return '..'
+
+    if (loading) return 'loading...'
     if (error) return `Errror! ${error.message}`
     return (
         <div style={styles.container}>
-            {console.log('data=>', data.personWithboats)}
-            <h3>My Boats</h3>
+            <h2>Boats</h2>
             <ul style={styles.list}>
                 {
                     data.personWithboats.map(item => {

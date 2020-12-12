@@ -129,7 +129,16 @@ const resolvers = {
   Query: {
     people: () => people,
     personWithboats(parent, args, context, info) {
-      return filter(boats, { personId: args.id } )
+      const person = find(boats, item => item.personId == args.personId)
+      if (!person) {
+        throw new Error(`Couldn't find boat with with person id ${args.personId}`)
+      }
+      const filteredBoats = []
+      forOwn(boats, item => {
+        item.personId === args.personId ? filteredBoats.push(item) : null
+      })
+      return filteredBoats
+
     }
   },
   Mutation: {

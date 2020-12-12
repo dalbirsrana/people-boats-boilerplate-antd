@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Card, List } from 'antd'
 
-import { EditOutlined } from '@ant-design/icons'
+import { EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import UpdatePerson from '../forms/UpdatePerson'
 import RemovePerson from '../buttons/RemovePerson'
+
+import PersonsBoats from '../layout/personsBoats'
 
 const getStyles = () => ({
   card: {
@@ -17,6 +19,11 @@ const Person = props => {
   const [lastName, setLastName] = useState(props.lastName)
   const [editMode, setEditMode] = useState(false)
   const styles = getStyles()
+
+  const handleButtonClick = () => setEditMode(!editMode)
+
+  const [display, setDisplay] = useState('none')
+
 
   const fullName = () => {
     return `${props.firstName} ${props.lastName}`
@@ -35,7 +42,11 @@ const Person = props => {
     }
   }
 
-  const handleButtonClick = () => setEditMode(!editMode)
+  
+
+  const handleInfoClick = () => {
+    display == 'none' ? setDisplay('block') : setDisplay('none')
+  }
 
   return (
     <List.Item key={props.id}>
@@ -55,7 +66,9 @@ const Person = props => {
           ]}
           style={styles.card}
         >
-          {fullName()}
+          <h2>{fullName()}</h2>
+            <InfoCircleOutlined style={{position:'relative'}} key='info' onClick={handleInfoClick} />
+            <PersonsBoats id={id} display={display} />
         </Card>
       )}
     </List.Item>
